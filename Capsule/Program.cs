@@ -76,7 +76,7 @@ namespace Capsule
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Vetements}/{action=Index}/{id?}");
+                pattern: "{controller=VetementsController}/{action=Index}/{id?}");
             app.MapRazorPages();
 
             app.Run();
