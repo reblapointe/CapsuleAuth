@@ -9,16 +9,16 @@ namespace Capsule.Authorizations
                     : AuthorizationHandler<OperationAuthorizationRequirement, Vetement>
     {
         protected override Task HandleRequirementAsync(
-                                              AuthorizationHandlerContext context,
-                                    OperationAuthorizationRequirement requirement,
-                                     Vetement resource)
+            AuthorizationHandlerContext context,
+            OperationAuthorizationRequirement requirement,
+            Vetement resource)
         {
             if (context.User == null)
             {
                 return Task.CompletedTask;
             }
 
-            // Administrators can do anything.
+            // Les administrateurs ont tous les droits
             if (context.User.IsInRole(AuthorizationConstants.VetementAdministratorsRole))
             {
                 context.Succeed(requirement);
