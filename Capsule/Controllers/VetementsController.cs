@@ -76,7 +76,6 @@ namespace Capsule.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("VetementId,Nom")] Vetement vetement)
         {
-            var errors = ModelState.Values.SelectMany(v => v.Errors);
             if (ModelState.IsValid)
             {
                 vetement.ProprietaireId = UserManager.GetUserId(User);
@@ -133,12 +132,12 @@ namespace Capsule.Controllers
             if (v == null)
                 return NotFound();
 
-            vetement.ProprietaireId = v.ProprietaireId;
+            v.Nom = vetement.Nom;
             if (ModelState.IsValid)
             {
                 try
                 {
-                    Context.Update(vetement);
+                    Context.Update(v);
                     await Context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
